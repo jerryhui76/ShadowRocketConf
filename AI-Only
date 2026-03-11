@@ -1,0 +1,26 @@
+[General]
+loglevel = notify
+ipv6 = false
+dns-server = 8.8.8.8,8.8.4.4
+
+[Rule]
+
+# ChatGPT
+DOMAIN-SUFFIX,openai.com,PROXY
+DOMAIN-SUFFIX,chatgpt.com,PROXY
+DOMAIN-SUFFIX,oaistatic.com,PROXY
+DOMAIN-SUFFIX,oaiusercontent.com,PROXY
+
+# Gemini
+DOMAIN-SUFFIX,gemini.google.com,PROXY
+DOMAIN-SUFFIX,bard.google.com,PROXY
+DOMAIN-SUFFIX,ai.google.dev,PROXY
+DOMAIN-SUFFIX,googleapis.com,PROXY
+DOMAIN-SUFFIX,deepmind.google,PROXY
+
+# Google login resources needed by Gemini
+DOMAIN-SUFFIX,googleusercontent.com,PROXY
+DOMAIN-SUFFIX,gstatic.com,PROXY
+
+# Everything else
+MATCH,DIRECT
