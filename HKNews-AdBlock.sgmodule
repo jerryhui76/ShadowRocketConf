@@ -1,0 +1,73 @@
+#!name = HK News Ad Blocker
+#!desc = Ad blocking for HK01, 星島頭條 and common HK news sites
+#!author = Jerry
+#!version = 1.0
+
+[Rule]
+
+# ===== HK News Ad Networks =====
+
+DOMAIN-SUFFIX,omgt3.com,REJECT
+DOMAIN-SUFFIX,hkhl.hk,REJECT-DROP
+
+# Note: hkhl.hk is 星島’s ad/tracking domain - NOT their image CDN (image.hkhl.hk)
+
+# If article images break, change to: DOMAIN,hkhl.hk,REJECT-DROP (exact match only)
+
+# ===== Common HK Ad Networks =====
+
+DOMAIN-SUFFIX,admedo.com,REJECT
+DOMAIN-SUFFIX,appier.net,REJECT
+DOMAIN-SUFFIX,appier.com,REJECT
+DOMAIN-SUFFIX,mads.yahoo.com,REJECT
+DOMAIN-SUFFIX,oath.com,REJECT
+DOMAIN-SUFFIX,advertising.yahoo.com,REJECT
+DOMAIN-SUFFIX,media.net,REJECT
+DOMAIN-SUFFIX,pubmatic.com,REJECT
+DOMAIN-SUFFIX,openx.net,REJECT
+DOMAIN-SUFFIX,rubiconproject.com,REJECT
+DOMAIN-SUFFIX,lijit.com,REJECT
+DOMAIN-SUFFIX,socdm.com,REJECT
+DOMAIN-SUFFIX,bidswitch.net,REJECT
+DOMAIN-SUFFIX,smartadserver.com,REJECT
+DOMAIN-SUFFIX,sharethrough.com,REJECT
+DOMAIN-SUFFIX,triplelift.com,REJECT
+DOMAIN-SUFFIX,indexww.com,REJECT
+DOMAIN-SUFFIX,contextweb.com,REJECT
+DOMAIN-SUFFIX,casalemedia.com,REJECT
+DOMAIN-SUFFIX,conversantmedia.com,REJECT
+
+# ===== Tracking / Analytics =====
+
+DOMAIN-SUFFIX,tealiumiq.com,REJECT
+DOMAIN-SUFFIX,tags.tiqcdn.com,REJECT
+DOMAIN-SUFFIX,collect.tealiumiq.com,REJECT
+DOMAIN-SUFFIX,visitor-service.tealiumiq.com,REJECT
+DOMAIN-SUFFIX,we-stats.com,REJECT
+DOMAIN-SUFFIX,online-metrix.net,REJECT
+
+[URL Rewrite]
+
+# ===== 星島頭條 - Block ad enterprise/sponsored content paths =====
+
+^https?://www.stheadline.com/ad-enterprise/ _ reject-200
+^https?://www.stheadline.com/ad-content/ _ reject-200
+^https?://www.stheadline.com/sponsored/ _ reject-200
+
+# ===== HK01 - Block affiliate tracking =====
+
+^https?://clk.omgt3.com/ _ reject-200
+
+# ===== Common interstitial/splash ad patterns =====
+
+^https?://.*/(splash|interstitial|overlay|popup|preroll|midroll)[./] _ reject-200
+^https?://.*/ads?/(show|display|load|request|banner|native|video) _ reject-200
+^https?://.*/advertisement/ _ reject-200
+^https?://.*/openads/ _ reject-200
+
+# ===== Google Ad requests =====
+
+^https?://pagead2.googlesyndication.com/ _ reject-200
+^https?://googleads.g.doubleclick.net/ _ reject-200
+^https?://adservice.google.com/ _ reject-200
+^https?://imasdk.googleapis.com/ _ reject-200
